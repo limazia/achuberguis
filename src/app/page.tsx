@@ -1,5 +1,7 @@
 "use client";
 
+import { useState, ChangeEvent } from "react";
+import { Loader2 } from "lucide-react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -20,7 +22,6 @@ import { InputTags } from "@/components/ui/input-tags";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Loader2 } from "lucide-react";
 
 const formSchema = z.object({
   name: z
@@ -53,33 +54,37 @@ const formSchema = z.object({
 type FormSchema = z.infer<typeof formSchema>;
 
 export default function Home() {
+  const [photo, setPhoto] = useState("");
+
   const {
     handleSubmit,
     register,
     control,
     watch,
+
     formState: { errors, isSubmitting, isDirty, isValid },
   } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
   });
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
+  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
     if (file) {
       const reader = new FileReader();
+
       reader.onloadend = () => {
-        setImagePreview(reader.result);
+        if (reader.result) {
+          setPhoto(reader.result as string);
+        }
       };
+
       reader.readAsDataURL(file);
     }
   };
 
   async function handleSend(data: FormSchema) {
-    try {
-      console.log(data);
-    } catch (error) {
-      alert("Erro ao gerar carteirinha!");
-    }
+    console.log(data);
   }
 
   const data = watch();
@@ -227,41 +232,63 @@ export default function Home() {
           </CardDescription>
         </CardHeader>
         <CardContent className="relative mt-2 overflow-hidden">
-          <Image src={ImagePreview} alt="Preview" className="w-full h-auto" />
+          <Image src={ImagePreview} alt="Prévia" className="w-full h-auto" />
 
-          <div className="absolute top-[115px] left-[50px]">
-            <span className="text-black text-xs font-bold uppercase">
-              {data?.name}
-            </span>
-          </div>
+          {photo && (
+            <div className="absolute top-[25px] left-[50px]">
+              <Image
+                src={photo}
+                alt="Foto"
+                className="w-[53px] h-[53px] rounded-md"
+                width={53}
+                height={53}
+              />
+            </div>
+          )}
 
-          <div className="absolute top-[170px] left-[50px]">
-            <span className="text-black text-xs font-bold uppercase">
-              {data?.affiliation?.map((affiliation, index) => (
-                <p key={index}>{affiliation}</p>
-              ))}
-            </span>
-          </div>
+          {data?.name && data?.name.length > 0 && (
+            <div className="absolute top-[115px] left-[50px]">
+              <span className="text-black text-xs font-bold uppercase">
+                {data?.name}
+              </span>
+            </div>
+          )}
 
-          <div className="absolute top-[120px] left-[205px]">
-            <span className="text-black text-xs font-bold uppercase">
-              {data?.nickname?.map((nick, index) => (
-                <p key={index}>{nick}</p>
-              ))}
-            </span>
-          </div>
+          {data?.affiliation && data?.affiliation.length > 0 && (
+            <div className="absolute top-[170px] left-[50px]">
+              <span className="text-black text-xs font-bold uppercase">
+                {data?.affiliation?.map((affiliation, index) => (
+                  <p key={index}>{affiliation}</p>
+                ))}
+              </span>
+            </div>
+          )}
 
-          <div className="absolute top-[220px] left-[50px]">
-            <span className="text-black text-xs font-bold uppercase">
-              {data?.priorities?.join(", ")}
-            </span>
-          </div>
+          {data?.nickname && data?.nickname.length > 0 && (
+            <div className="absolute top-[120px] left-[205px]">
+              <span className="text-black text-xs font-bold uppercase">
+                {data?.nickname?.map((nick, index) => (
+                  <p key={index}>{nick}</p>
+                ))}
+              </span>
+            </div>
+          )}
 
-          <div className="absolute top-[250px] left-[50px]">
-            <span className="text-black text-xs font-bold uppercase">
-              {data?.category}
-            </span>
-          </div>
+          {data?.priorities && data?.priorities.length > 0 && (
+            <div className="absolute top-[220px] left-[50px]">
+              <span className="text-black text-xs font-bold uppercase">
+                {data?.priorities?.join(", ")}
+              </span>
+            </div>
+          )}
+
+          {data?.category && data?.category.length > 0 && (
+            <div className="absolute top-[250px] left-[50px]">
+              <span className="text-black text-xs font-bold uppercase">
+                {data?.category}
+              </span>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
