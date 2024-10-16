@@ -5,9 +5,7 @@
 import { ImageResponse } from "@vercel/og";
 import { NextRequest } from "next/server";
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = "edge";
 
 const key = crypto.subtle.importKey(
   "raw",
@@ -23,8 +21,8 @@ function toHex(arrayBuffer: any) {
     .join("");
 }
 
-export default async function handler(req: NextRequest) {
-  const { searchParams } = req.nextUrl;
+export async function GET(request: NextRequest) {
+  const { searchParams } = request.nextUrl;
 
   const id = searchParams.get("id");
   const token = searchParams.get("token");
@@ -61,8 +59,8 @@ export default async function handler(req: NextRequest) {
       </div>
     ),
     {
-      width: 1200,
-      height: 630,
+      width: 775,
+      height: 269,
     }
   );
 }
