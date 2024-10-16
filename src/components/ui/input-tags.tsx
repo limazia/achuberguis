@@ -17,7 +17,7 @@ export type InputTagsProps = {
   value: string[];
   onChange: Dispatch<SetStateAction<string[]>>;
   disabled?: boolean;
-  limit?: number; // New optional 'limit' prop
+  limit?: number;
 } & ComponentProps<"input">;
 
 const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
@@ -41,7 +41,7 @@ const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
               onChange={(e) => setPendingDataPoint(e.target.value)}
               onKeyDown={(e) => {
                 if (
-                  (e.key === "Enter" || e.key === "," || e.key === " ") &&
+                  (e.key === "Enter" || e.key === "," ) && 
                   (!limit || value.length < limit)
                 ) {
                   e.preventDefault();
@@ -59,7 +59,9 @@ const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
               variant="link"
               className="p-1 group-focus-within:text-[#bec1c6]"
               onClick={addPendingDataPoint}
-              disabled={disabled || (limit && value.length >= limit ? true : false)}
+              disabled={
+                disabled || (limit && value.length >= limit ? true : false)
+              }
             >
               <Plus className="size-4" />
             </Button>
