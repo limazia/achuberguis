@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 import { ClientOnly } from "@/components/client-only";
 
-const URL = process.env.VERCEL_URL ? "https://" + process.env.VERCEL_URL : "";
+const URL = process.env.NEXT_PUBLIC_VERCEL_URL ? "https://" + process.env.NEXT_PUBLIC_VERCEL_URL : "";
 
 export const metadata: Metadata = {
   title: "ACHUBERGUIS",
