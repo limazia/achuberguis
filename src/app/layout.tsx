@@ -6,8 +6,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 import { ClientOnly } from "@/components/client-only";
-
-const URL = process.env.NEXT_PUBLIC_VERCEL_URL ? "https://" + process.env.NEXT_PUBLIC_VERCEL_URL : "";
+import { getBaseURL } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "ACHUBERGUIS",
@@ -22,9 +21,9 @@ export const metadata: Metadata = {
     url: "https://achuberguis.vercel.app/",
     images: [
       {
-        url: `${URL}/api/og`,
-        width: 1200,
-        height: 600,
+        url: `${getBaseURL()}/api/og`,
+        width: 512,
+        height: 512,
         alt: "og image",
       },
     ],
