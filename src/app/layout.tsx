@@ -10,6 +10,9 @@ import { ClientOnly } from "@/components/client-only";
 export const metadata: Metadata = {
   title: "ACHUBERGUIS",
   description: "Gere sua carteirinha do ACHUBERGUIS agora mesmo!",
+  icons: {
+    icon: "/favicon.ico",
+  },
   openGraph: {
     siteName: "ACHUBERGUIS",
     title: "ACHUBERGUIS",
