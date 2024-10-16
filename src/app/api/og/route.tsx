@@ -32,7 +32,6 @@ export async function GET() {
         <div
           style={{
             fontSize: 60,
-            marginTop: 30,
             fontWeight: "bold",
             lineHeight: 1.8,
           }}
@@ -41,7 +40,7 @@ export async function GET() {
         </div>
         <div
           style={{
-            fontSize: 40,
+            fontSize: 30,
           }}
         >
           Gere sua carteirinha do ACHUBERGUIS agora mesmo!
@@ -49,8 +48,8 @@ export async function GET() {
       </div>
     ),
     {
-      width: 1200,
-      height: 600,
+      width: 512,
+      height: 512,
     }
   );
 }
