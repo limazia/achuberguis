@@ -7,6 +7,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 import { ClientOnly } from "@/components/client-only";
 
+const URL = process.env.VERCEL_URL ? "https://" + process.env.VERCEL_URL : "";
+
 export const metadata: Metadata = {
   title: "ACHUBERGUIS",
   description: "Gere sua carteirinha do ACHUBERGUIS agora mesmo!",
@@ -17,14 +19,12 @@ export const metadata: Metadata = {
     siteName: "ACHUBERGUIS",
     title: "ACHUBERGUIS",
     description: "Gere sua carteirinha do ACHUBERGUIS agora mesmo!",
-    url: "https://jah-pod-tomar-copao.vercel.app/",
+    url: "https://achuberguis.vercel.app/",
     images: [
       {
-        url: `${
-          process.env.VERCEL_URL ? "https://" + process.env.VERCEL_URL : ""
-        }/api/vercel`,
-        width: 512,
-        height: 512,
+        url: `${URL}/api/og`,
+        width: 1200,
+        height: 600,
         alt: "og image",
       },
     ],
