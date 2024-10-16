@@ -90,8 +90,8 @@ export default function Home() {
   const data = watch();
 
   return (
-    <div className="container mx-auto p-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
-      <Card className="w-full max-w-4xl mx-auto">
+    <div className="container p-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>ACHUBERGUIS</CardTitle>
           <CardDescription className="uppercase">
@@ -224,7 +224,7 @@ export default function Home() {
         </CardContent>
       </Card>
 
-      <Card className="w-full max-w-4xl mx-auto">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>Pré-visualização</CardTitle>
           <CardDescription>
@@ -232,7 +232,30 @@ export default function Home() {
           </CardDescription>
         </CardHeader>
         <CardContent className="relative mt-2 overflow-hidden">
-          <Image src={ImagePreview} alt="Prévia" className="w-full h-auto" />
+          <div className="w-card h-card border-2 border-red-500 p-3 bg-gray-100">
+            <div className="w-card h-card border-[3px] border-black rounded-md">
+              <div className="rounded-md bg-gradient-to-b from-yellow-100/90 via-yellow-200/80 to-yellow-300 h-64 p-4 w-full">
+                <div className="size-8 border-2 border-red-500 p-4">
+                  {photo && (
+                    <div className="absolute top-[25px] left-[50px]">
+                      <Image
+                        src={photo}
+                        alt="Foto"
+                        className="w-[53px] h-[53px] rounded-md"
+                        width={53}
+                        height={53}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+          <Image
+            src={ImagePreview}
+            alt="Prévia"
+            className="w-full h-auto mt-5"
+          />
 
           {photo && (
             <div className="absolute top-[25px] left-[50px]">
